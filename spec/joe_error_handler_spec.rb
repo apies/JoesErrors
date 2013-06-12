@@ -58,6 +58,7 @@ describe JoeErrorHandler do
 
 
       def example_handling_method
+        puts "YOUR ERROR IS BEING HANDLED!!"
         Dir.pwd
       end
 
@@ -66,7 +67,7 @@ describe JoeErrorHandler do
         2/0
       end
       handle_error :likely_to_fail_method, :handle_with => :example_handling_method
-      
+
     end
 
     let(:joe_bungholio) {JoeBungholio.new}

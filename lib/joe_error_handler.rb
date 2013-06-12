@@ -18,14 +18,23 @@ module JoeErrorHandler
 
     def handle_error(protected_method, options = {})
       alias_method("_#{protected_method}", protected_method)
-      #with_error_handling
-      define_method(protected_method.to_s, 
+      define_method(protected_method, 
         ->(params = nil) do
-          with_error_handling(lambda { |error| Dir.pwd}) do
-            self.call(protected_method)
+          with_error_handling(lambda { |error| puts "YOUR ERROR IS BEING HANDLED!!#{error}"}) do
+            self.call(_protected_method)
           end
         end
       )
+
+      # define_method(protected_method, 
+      #   ->(params = nil) do
+      #     with_error_handling( self.call(options[:handle_with]) ) do
+      #       self.call(_protected_method)
+      #     end
+      #   end
+      # )
+
+      #define_method(protected_method, ->(params = nil){with_error_handling(error_callback"method")})
     end
   end
 
