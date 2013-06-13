@@ -11,3 +11,7 @@ ActiveRecord::Base.establish_connection(
   pool: 5,
   timeout: 5000
 )
+
+RSpec.configure do |config|
+  #config.filter_run :focus => true
+end

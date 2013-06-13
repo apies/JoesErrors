@@ -58,9 +58,14 @@ describe JoeErrorHandler do
 
 
       def example_handling_method
-        puts "YOUR ERROR IS BEING HANDLED!!"
         Dir.pwd
+        puts "YOUR ERROR IS BEING HANDLED!!"
       end
+
+      def other_method
+        "THIS METHOD WORKs NO ERROR CAUGHT"
+      end
+      handle_error :other_method, :handle_with => :example_handling_method
 
       def likely_to_fail_method
         #you can't divide anything by zero :D
@@ -73,9 +78,11 @@ describe JoeErrorHandler do
     let(:joe_bungholio) {JoeBungholio.new}
 
 
-    it "should be able to catch an error" do
+    it "should be able to catch an error", :focus => true do
 
       lambda {joe_bungholio.likely_to_fail_method}.should_not raise_error
+      joe_bungholio.other_method.should eq ("THIS METHOD WORKs NO ERROR CAUGHT")
+
     
     end
 
