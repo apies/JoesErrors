@@ -57,15 +57,14 @@ describe JoeErrorHandler do
       include JoeErrorHandler
 
 
-      def example_handling_method
-        Dir.pwd
-        puts "YOUR ERROR IS BEING HANDLED!!"
+      def example_handling_method(error)
+        puts "YOUR ERROR IS BEING HANDLED!!#{error}"
       end
 
       def other_method
         "THIS METHOD WORKs NO ERROR CAUGHT"
       end
-      handle_error :other_method, :handle_with => :example_handling_method
+      #handle_error :other_method, :handle_with => :example_handling_method
 
       def likely_to_fail_method
         #you can't divide anything by zero :D
