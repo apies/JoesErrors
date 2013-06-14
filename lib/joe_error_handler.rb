@@ -20,7 +20,7 @@ module JoeErrorHandler
       alias_method("_#{protected_method}", protected_method)
       define_method(protected_method, 
         ->(params = nil) do
-          error_method_lambda = lambda {|error| self.send(options[:handle_with], error)}
+          error_method_lambda = ->(error=nil) {self.send(options[:handle_with], error)}
           with_error_handling(error_method_lambda) do
             self.send("_#{protected_method}".to_sym)
           end
